@@ -7,14 +7,6 @@ terraform {
       source  = "hashicorp/aws"
       version = ">= 5.31"
     }
-  backend "s3" {
-    bucket = "terraform-remote-st"
-    key    = "demo/terraform.tfstate"
-    region = "us-east-1" 
- 
-    # For State Locking
-    dynamodb_table = "terraform-locks"    
-  }  
   }
 }
 
