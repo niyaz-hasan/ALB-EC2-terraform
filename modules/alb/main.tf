@@ -22,12 +22,12 @@ resource "aws_lb_listener_rule" "image" {
 
   action {
     type             = "forward"
-    target_group_arn = var.tg_arns[0]  # Assume tg_a
+    target_group_arn = var.tg_arns[1]  # Assume tg_a
   }
 
   condition {
     path_pattern {
-      values = ["/images/*"]
+      values = ["/images*"]
     }
   }
 }
@@ -38,12 +38,12 @@ resource "aws_lb_listener_rule" "register" {
 
   action {
     type             = "forward"
-    target_group_arn = var.tg_arns[1]  # Assume tg_b
+    target_group_arn = var.tg_arns[2]  # Assume tg_b
   }
 
   condition {
     path_pattern {
-      values = ["/register"]
+      values = ["/register*"]
     }
   }
 }

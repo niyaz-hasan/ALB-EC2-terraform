@@ -3,8 +3,6 @@ module "vpc" {
   name           = var.name
   vpc_cidr_block = var.vpc_cidr_block
   
-  
-
 }
 
 module "alb" {
@@ -60,7 +58,8 @@ locals {
               yum install -y nginx
               systemctl start nginx
               systemctl enable nginx
-              echo "<h1>Image Page</h1>" > /usr/share/nginx/html/index.html
+              mkdir -p /usr/share/nginx/html/images
+              echo "<h1>Image Page</h1>" > /usr/share/nginx/html/images/index.html
           EOF
 
   user_data_register = <<-EOF
@@ -68,7 +67,8 @@ locals {
               yum install -y nginx
               systemctl start nginx
               systemctl enable nginx
-              echo "<h1>Register Page</h1>" > /usr/share/nginx/html/index.html
+              mkdir -p /usr/share/nginx/html/register
+              echo "<h1>Register Page</h1>" > /usr/share/nginx/html/register/index.html
           EOF
 }
 
