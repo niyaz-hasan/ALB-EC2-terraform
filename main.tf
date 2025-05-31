@@ -51,6 +51,7 @@ locals {
               systemctl start nginx
               systemctl enable nginx
               echo "<h1>Home</h1>" > /usr/share/nginx/html/index.html
+              echo "<p>Instance A</p>" >> /usr/share/nginx/html/index.html
           EOF
 
   user_data_image = <<-EOF
@@ -59,7 +60,8 @@ locals {
               systemctl start nginx
               systemctl enable nginx
               mkdir -p /usr/share/nginx/html/images
-              echo "<h1>Image Page</h1>" > /usr/share/nginx/html/images/index.html
+              echo "<h1>Image</h1>" > /usr/share/nginx/html/images/index.html
+              echo "<p>Instance B</p>" >> /usr/share/nginx/html/images/index.html
           EOF
 
   user_data_register = <<-EOF
@@ -68,7 +70,8 @@ locals {
               systemctl start nginx
               systemctl enable nginx
               mkdir -p /usr/share/nginx/html/register
-              echo "<h1>Register Page</h1>" > /usr/share/nginx/html/register/index.html
+              echo "<h1>Register</h1>" > /usr/share/nginx/html/register/index.html
+              echo "<p>Instance C</p>" >> /usr/share/nginx/html/images/index.html
           EOF
 }
 
@@ -96,6 +99,6 @@ module "instances_c" {
   tg_arn          = module.tg_c.arn
   subnet_id       = module.vpc.public_subnets[2]
   vpc_security_group_ids = [module.sg_group.ec2_security_group_id]
-  user_data       = local.user_data_image
+  user_data       = local.user_data_register
   name            = "instance-c"
 }
